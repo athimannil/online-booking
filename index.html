@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Online Booking App</title>
+	<link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+	<link href="bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css" rel="stylesheet">
+	<script src="bower_components/moment/moment.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	<script src="bower_components/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.min.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="calendarCtrl">
+
+
+<!-- 
+<script id="customMonthCell.html" type="text/ng-template">
+  <div class="cal-month-day">
+
+    <span
+      class="pull-right"
+      data-cal-date
+      ng-click="vm.calendarCtrl.dateClicked(day.date)"
+      ng-bind="day.label">
+    </span>
+
+    <small style="position: absolute; bottom: 10px; left: 5px">
+    	{{ bookingPerDay}} - {{day.events.length }} left
+    </small>
+
+  </div>
+</script>
+-->
+
+
+	<div class="container">
+	  <div class="row">
+		<div class="col-sm-12">
+			<h1 class="text-center">{{calendarTitle}}</h1>
+			<mwl-calendar
+			    view="calendarView"
+			    view-date="calendarDate"
+				events="bookings"
+				on-event-click="bookingClicked(calendarEvent)"
+				view-title="calendarTitle"
+
+				on-timespan-click = "dateClicked(calendarCell.events)"
+				
+				on-event-times-changed="calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
+				edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
+				delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'"
+				on-edit-event-click="eventEdited(calendarEvent)"
+				on-delete-event-click="eventDeleted(calendarEvent)"
+				cell-is-open="false"
+				on-view-change-click="false"
+				cell-modifier="dayModifier(calendarCell)"
+			    >
+				<!-- on-view-change-click -->
+			</mwl-calendar>
+		</div>
+	  </div>
+	</div>
+	<script src="js/core.js"></script>
+</body>
+</html>
