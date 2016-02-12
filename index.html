@@ -5,10 +5,13 @@
 	<title>Online Booking App</title>
 	<link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 	<link href="bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css" rel="stylesheet">
+	<link href="css/app.css" rel="stylesheet">
 	<script src="bower_components/moment/moment.js"></script>
+	<script src="bower_components/moment/locale/ml.js"></script>
 	<script src="bower_components/angular/angular.js"></script>
 	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 	<script src="bower_components/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.min.js"></script>
+	<script src="bower_components/angular-moment/angular-moment.js"></script>
 </head>
 <body ng-app="myApp" ng-controller="calendarCtrl">
 
@@ -36,7 +39,11 @@
 	<div class="container">
 	  <div class="row">
 		<div class="col-sm-12">
+			<input type="date" class="form-contol" ng-model="pickDate"> {{pickDate | amDateFormat:'dddd MMMM Do YYYY, h:mm:ss a'}} {{pickDate}}
+		</div>
+		<div class="col-sm-12">
 			<h1 class="text-center">{{calendarTitle}}</h1>
+				<!-- on-timespan-click = "dateClicked(calendarCell.events, calendarCell)" -->
 			<mwl-calendar
 			    view="calendarView"
 			    view-date="calendarDate"
@@ -44,7 +51,7 @@
 				on-event-click="bookingClicked(calendarEvent)"
 				view-title="calendarTitle"
 
-				on-timespan-click = "dateClicked(calendarCell.events)"
+				on-timespan-click = "dateClicked(calendarCell)"
 				
 				on-event-times-changed="calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
 				edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
@@ -60,6 +67,26 @@
 		</div>
 	  </div>
 	</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">I'm a modal!</h3>
+    </div>
+    <div class="modal-body">
+        <ul>
+            <li ng-repeat="item in items">
+                <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item.title }}</a>
+            </li>
+        </ul>
+        Selected: <b>{{ selected.title }}</b>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+
+
 	<script src="js/core.js"></script>
 </body>
 </html>

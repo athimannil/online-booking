@@ -1,0 +1,14 @@
+.cal-month-box [class*=cal-cell], 
+.cal-year-box [class*=span]{
+	min-height: 80px;
+	/*border-right: 1px solid #bbbfcb;*/
+}
+span[data-cal-date]{
+	margin-top: 10px;
+	margin-right: 10px;
+	font-size: 18px;
+}
+
+.cal-month-day{
+	height: 80px;
+}
