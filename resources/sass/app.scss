@@ -1,3 +1,5 @@
+@import 'bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+@import 'angular-bootstrap-calendar';
 .cal-month-box [class*=cal-cell], 
 .cal-year-box [class*=span]{
 	min-height: 80px;
