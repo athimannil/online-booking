@@ -1,4 +1,9 @@
+@import "variables";
 @import 'bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+@import "mixins";
+@import "flex-mixin";
+
+
 @import 'angular-bootstrap-calendar';
 .cal-month-box [class*=cal-cell], 
 .cal-year-box [class*=span]{
@@ -13,4 +18,64 @@ span[data-cal-date]{
 
 .cal-month-day{
 	height: 80px;
+}
+
+
+
+.time-list{
+	@include flexbox;
+	@include flex-wrap(wrap);
+	@include justify-content(center);
+	@include align-items(center);
+	@include align-content(center);
+	min-height: 500px;
+	.time{
+		padding: 10px 20px;
+		margin: 10px;
+		@include borderRadius(2px);
+	}
+}
+
+.tag-list{
+	&:not(.trigger-list){
+		li:not(:last-child){
+			padding: 3px;
+		}
+		&:last-child{}
+	}
+	li{
+		width: auto;
+		height: auto;
+		padding: 10px 14px;
+		font-size: 15px;
+		margin-left: 10px;
+	    padding: 3px;
+		text-align: center;
+		cursor: pointer;
+		border: 2px solid $border;
+		@include borderRadius(2px);
+		@include transition(border 0.3s);
+		&.incategory{
+			border: 1px solid #ddd;
+			border-top-color: $white;
+			height: 250px;
+			overflow: auto;
+		}
+		&.active{
+			border-color: $brand-primary;
+			color: $brand-primary;
+		}
+		&:first-child{
+			margin-left: 0;
+		}
+		&:last-child{
+			padding: 10px 12px;
+			a{
+				float: none;
+				margin: -4px 0;
+				display: inline-block;
+				@include rotate(45);
+			}
+		}
+	}
 }

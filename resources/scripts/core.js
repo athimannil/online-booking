@@ -135,7 +135,7 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 		},{
 			timeFrom: moment(10, 'hours').toDate(),
 			timeTill: moment(10, 'hours').toDate(),
-			booked: false
+			booked: true
 		},{
 			timeFrom: moment(11, 'hours').toDate(),
 			timeTill: moment(11, 'hours').toDate(),
