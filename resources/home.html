@@ -1,3 +1,20 @@
+<script id="customMonthCell.html" type="text/ng-template">
+  <div class="cal-month-day">
+
+    <span
+      class="pull-right"
+      data-cal-date
+      ng-click="vm.calendarCtrl.dateClicked(day.date)"
+      ng-bind="day.label">
+    </span>
+
+    <small style="position: absolute; bottom: 10px; left: 5px">
+      {{ 10 - day.events.length  }} left
+    </small>
+
+  </div>
+</script>
+
 <div class="row">
 	<div class="col-sm-12 bg-primary">
 		<!-- <input type="date" class="form-contol" ng-model="pickDate"> {{pickDate | amDateFormat:'dddd MMMM Do YYYY, h:mm:ss a'}} {{pickDate}} -->
