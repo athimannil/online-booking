@@ -16,6 +16,11 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 			templateUrl: "time.html",
             controller: 'timeCtrl',
 		})
+		.state('book', {
+			url: "/book",
+			templateUrl: "book.html",
+			controller: 'bookCtrl',
+		})
 		;
 	$urlRouterProvider.otherwise("/");
   //   .state('state1.list', {
@@ -174,6 +179,10 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 		} else {
 			// statement
 			console.log('got to register page');
+			$state.go("book");
 		}
 	};
+})
+.controller('bookCtrl', function ($scope, moment, $state) {
+	
 });
