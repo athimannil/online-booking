@@ -38,7 +38,7 @@ span[data-cal-date]{
 	height: 80px;
 }
 
-
+// Calendar left & right border
 .cal-month-box{
 	border-left: none;
 }
@@ -47,6 +47,7 @@ span[data-cal-date]{
 		border-right: none;
 	}
 }
-.cal-month-box [class*="cal-cell"]{
-	// border-right: none;
+// hide week info
+#cal-week-box {
+  display: none;
 }
