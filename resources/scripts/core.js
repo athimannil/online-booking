@@ -122,7 +122,8 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 		console.log("hello mate");
 		console.log(theBooking.events);
 		console.log(theBooking.events.length);
-		$state.go("time");
+		// $state.go("time");
+		$state.go("book");
 	};
 
 	// custom texts
@@ -184,5 +185,5 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 	};
 })
 .controller('bookCtrl', function ($scope, moment, $state) {
-	
+
 });

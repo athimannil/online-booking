@@ -12,6 +12,16 @@ html{
 body{
   min-height: 100vh;
 }
+.box{
+	margin-top: 50px;
+	margin-bottom: 50px;
+
+    border: 1px solid #DDD;
+    background: #fff;
+}
+
+
+
 
 @import 'angular-bootstrap-calendar';
 .cal-month-box [class*=cal-cell], 
@@ -26,4 +36,17 @@ span[data-cal-date]{
 }
 .cal-month-day{
 	height: 80px;
+}
+
+
+.cal-month-box{
+	border-left: none;
+}
+.cal-before-eventlist{
+	.cal-cell:last-child{
+		border-right: none;
+	}
+}
+.cal-month-box [class*="cal-cell"]{
+	// border-right: none;
 }

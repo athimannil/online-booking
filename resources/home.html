@@ -1,29 +1,49 @@
 <div class="row">
-	<div class="col-sm-12">
-		<input type="date" class="form-contol" ng-model="pickDate"> {{pickDate | amDateFormat:'dddd MMMM Do YYYY, h:mm:ss a'}} {{pickDate}}
+	<div class="col-sm-12 bg-primary">
+		<!-- <input type="date" class="form-contol" ng-model="pickDate"> {{pickDate | amDateFormat:'dddd MMMM Do YYYY, h:mm:ss a'}} {{pickDate}} -->
+		<h4 class="text-center">{{calendarTitle}}</h4>
+        <button
+          class="btn btn-primary"
+          mwl-date-modifier
+          date="calendarDate"
+          decrement="calendarView">
+          Previous
+        </button>
+        <button
+          class="btn btn-default"
+          mwl-date-modifier
+          date="calendarDate"
+          set-to-today>
+          Today
+        </button>
+        <button
+          class="btn btn-primary"
+          mwl-date-modifier
+          date="calendarDate"
+          increment="calendarView">
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          
+        </button>
 	</div>
-	<div class="col-sm-12">
-			<h1 class="text-center">{{calendarTitle}}</h1>
 				<!-- on-timespan-click = "dateClicked(calendarCell.events, calendarCell)" -->
-			<mwl-calendar
-					view="calendarView"
-					view-date="calendarDate"
-				events="bookings"
-				on-event-click="bookingClicked(calendarEvent)"
-				view-title="calendarTitle"
+	<mwl-calendar
+			view="calendarView"
+			view-date="calendarDate"
+		events="bookings"
+		on-event-click="bookingClicked(calendarEvent)"
+		view-title="calendarTitle"
 
-				on-timespan-click = "dateClicked(calendarCell)"
-				
-				on-event-times-changed="calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
-				edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
-				delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'"
-				on-edit-event-click="eventEdited(calendarEvent)"
-				on-delete-event-click="eventDeleted(calendarEvent)"
-				cell-is-open="false"
-				on-view-change-click="false"
-				cell-modifier="dayModifier(calendarCell)"
-					>
-				<!-- on-view-change-click -->
-			</mwl-calendar>
-	</div>
+		on-timespan-click = "dateClicked(calendarCell)"
+		
+		on-event-times-changed="calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
+		edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
+		delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'"
+		on-edit-event-click="eventEdited(calendarEvent)"
+		on-delete-event-click="eventDeleted(calendarEvent)"
+		cell-is-open="false"
+		on-view-change-click="false"
+		cell-modifier="dayModifier(calendarCell)"
+			>
+		<!-- on-view-change-click -->
+	</mwl-calendar>
 </div>
