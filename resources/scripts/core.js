@@ -1,6 +1,4 @@
 angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMoment'])
-
-
 .config(function($stateProvider, $urlRouterProvider) {
 	// For any unmatched url, redirect to /state1
   
@@ -46,6 +44,9 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 	console.log("hello mate");
 }])
 .controller('homeCtrl', ['$scope','moment', '$state', function($scope, moment, $state){
+	$scope.isPastMonth = function  (thisMonth) {
+		return moment(thisMonth).isAfter(moment(), 'month');
+	};
 	// Monday week start
 	moment.locale('en', {
 	  week : {
