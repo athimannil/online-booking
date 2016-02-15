@@ -142,7 +142,7 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 
     console.log(calendarConfig); //view all available config
 
-    // calendarConfig.templates.calendarMonthCell = 'customMonthCell.html';
+    calendarConfig.templates.calendarMonthCell = 'customMonthCell.html';
     // calendarConfig.templates.calendarMonthView = 'path/to/custom/template.html'; //change the month view template to a custom template
 
     // calendarConfig.dateFormatter = 'moment'; //use either moment or angular to format dates on the calendar. Default angular. Setting this will override any date formats you have already set.

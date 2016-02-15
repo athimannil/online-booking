@@ -18,29 +18,21 @@
 <div class="row">
 	<div class="col-sm-12 bg-primary">
 		<!-- <input type="date" class="form-contol" ng-model="pickDate"> {{pickDate | amDateFormat:'dddd MMMM Do YYYY, h:mm:ss a'}} {{pickDate}} -->
-		<h4 class="text-center">{{calendarTitle}}</h4>
         <button
-          class="btn btn-primary"
+          class="btn btn-primary pull-left"
           mwl-date-modifier
           date="calendarDate"
           decrement="calendarView">
-          Previous
+          <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
         </button>
         <button
-          class="btn btn-default"
-          mwl-date-modifier
-          date="calendarDate"
-          set-to-today>
-          Today
-        </button>
-        <button
-          class="btn btn-primary"
+          class="btn btn-primary pull-right"
           mwl-date-modifier
           date="calendarDate"
           increment="calendarView">
           <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-          
         </button>
+		<h4 class="text-center">{{calendarTitle}}</h4>
 	</div>
 				<!-- on-timespan-click = "dateClicked(calendarCell.events, calendarCell)" -->
 	<mwl-calendar
