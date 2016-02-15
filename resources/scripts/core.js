@@ -167,17 +167,13 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 		}
 	];
 
-	$scope.selDate = function (theDate) {
-		theDate.booked = true;
-		console.log(theDate);
-		$scope.selected.time = theDate;
-	};
-
-	$scope.selected = {};
-	$scope.ok = function () {
-		$state.go("register");
-	};
-	$scope.cancel = function () {
-		$state.go("/");
+	$scope.chooseTime = function (theTime) {
+		if (theTime.booked) {
+			// statement
+			console.log('Time is already booked');
+		} else {
+			// statement
+			console.log('got to register page');
+		}
 	};
 });

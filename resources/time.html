@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="time-list">
-            <div class="time text-center" ng-repeat="availableBooking in availableBookings" ng-model="selected.time" ng-class="availableBooking.booked ? 'btn-danger disabled' : 'btn-primary'">
+            <div class="btn time text-center" ng-repeat="availableBooking in availableBookings" ng-model="selected.time" ng-class="availableBooking.booked ? 'btn-danger disabled' : 'btn-primary'" ng-click="chooseTime(availableBooking)">
                 {{ availableBooking.timeFrom | amDateFormat:' h:mm a'}}
                 <br>
                 {{availableBooking.booked ? 'Booked' : 'Available'}}
