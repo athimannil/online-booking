@@ -141,7 +141,7 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 }])
 .config(function(calendarConfig) {
 
-    console.log(calendarConfig); //view all available config
+    // console.log(calendarConfig); //view all available config
 
     calendarConfig.templates.calendarMonthCell = 'customMonthCell.html';
     // calendarConfig.templates.calendarMonthView = 'path/to/custom/template.html'; //change the month view template to a custom template
@@ -215,5 +215,24 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 })
 .controller('registerCtrl', function ($scope, moment, $state) {
 
+//     $scope.register.db = moment();
+//     $scope.s = moment();
+// $scope.s.date();
+//  $scope.s.month();
+//  $scope.s.year();
+//     console.log($scope.s);
+//     console.log($scope.s);
+
+
+	console.log(moment('12-12-2020', 'DD-MM-YYYY').isValid());
+
+	$scope.registerMe = function (argument) {
+		 $scope.kooy = moment(new Date($scope.register.db.day + ' ' + $scope.register.db.month + ' ' + $scope.register.db.year)).fromNow(true);
+		 console.log($scope.kooy);
+		 $scope.keey = moment($scope.register.db.day + $scope.register.db.month + $scope.register.db.year).format('MMMM Do YYYY');
+		 console.log($scope.keey);
+		 // $scope.kooy = moment(Date($scope.register.db.day + ' ' + $scope.register.db.month + ' ' + $scope.register.db.year));
+		 // console.log($scope.kooy);
+	};
 });
 
