@@ -14,10 +14,10 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 			templateUrl: "time.html",
             controller: 'timeCtrl',
 		})
-		.state('book', {
-			url: "/book",
-			templateUrl: "book.html",
-			controller: 'bookCtrl',
+		.state('register', {
+			url: "/register",
+			templateUrl: "register.html",
+			controller: 'registerCtrl',
 		})
 		;
 	$urlRouterProvider.otherwise("/");
@@ -130,7 +130,7 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 		console.log(theBooking.events);
 		console.log(theBooking.events.length);
 		// $state.go("time");
-		$state.go("book");
+		$state.go("register");
 	};
 
 	// custom texts
@@ -209,11 +209,11 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 		} else {
 			// statement
 			console.log('got to register page');
-			$state.go("book");
+			$state.go("register");
 		}
 	};
 })
-.controller('bookCtrl', function ($scope, moment, $state) {
+.controller('registerCtrl', function ($scope, moment, $state) {
 
 });
 
