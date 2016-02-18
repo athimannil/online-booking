@@ -214,18 +214,7 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 	};
 })
 .controller('registerCtrl', function ($scope, moment, $state) {
-
-//     $scope.register.db = moment();
-//     $scope.s = moment();
-// $scope.s.date();
-//  $scope.s.month();
-//  $scope.s.year();
-//     console.log($scope.s);
-//     console.log($scope.s);
-
-
-	console.log(moment('12-12-2020', 'DD-MM-YYYY').isValid());
-
+	// console.log(moment('12-12-2020', 'DD-MM-YYYY').isValid());
 	$scope.registerMe = function (argument) {
 		// merge dob to one string
 		$scope.register.dob = moment(new Date($scope.register.db.day + ' ' + $scope.register.db.month + ' ' + $scope.register.db.year)).format();
