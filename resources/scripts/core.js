@@ -227,12 +227,10 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 	console.log(moment('12-12-2020', 'DD-MM-YYYY').isValid());
 
 	$scope.registerMe = function (argument) {
-		 $scope.kooy = moment(new Date($scope.register.db.day + ' ' + $scope.register.db.month + ' ' + $scope.register.db.year)).fromNow(true);
-		 console.log($scope.kooy);
-		 $scope.keey = moment($scope.register.db.day + $scope.register.db.month + $scope.register.db.year).format('MMMM Do YYYY');
-		 console.log($scope.keey);
-		 // $scope.kooy = moment(Date($scope.register.db.day + ' ' + $scope.register.db.month + ' ' + $scope.register.db.year));
-		 // console.log($scope.kooy);
+		// merge dob to one string
+		$scope.register.dob = moment(new Date($scope.register.db.day + ' ' + $scope.register.db.month + ' ' + $scope.register.db.year)).format();
+		delete $scope.register.db;
+		console.log($scope.register);
 	};
 });
 
