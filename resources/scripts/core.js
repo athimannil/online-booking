@@ -242,7 +242,7 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 
 		bookme.addRegistration($scope.register);
 		// console.log(bookme.yourName);
-		$state.go("done");
+		$state.go("booked");
 
 	};
 	$scope.callService = function(argument) {
@@ -250,7 +250,8 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 		// $scope.me = bookme.getRegistration;
 		// console.log(bookme.getRegistration);
 		// console.log($scope.me);
-		console.log(bookme.getRegistration());
+		$scope.registerLog = bookme.getRegistration();
+		console.log($scope.register);
 	};
 })
 .service('bookme', function(){
