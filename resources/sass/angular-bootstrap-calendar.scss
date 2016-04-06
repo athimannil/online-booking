@@ -549,3 +549,33 @@ a.cal-event-week {
     border-bottom: 1px solid #e1e1e1;
   }
 }
+
+
+// custom
+.cal-month-box [class*=cal-cell], 
+.cal-year-box [class*=span]{
+  min-height: 80px;
+  /*border-right: 1px solid #bbbfcb;*/
+}
+span[data-cal-date]{
+  margin-top: 10px;
+  margin-right: 10px;
+  font-size: 18px;
+}
+.cal-month-day{
+  height: 80px;
+}
+
+// Calendar left & right border
+.cal-month-box{
+  border-left: none;
+}
+.cal-before-eventlist{
+  .cal-cell:last-child{
+    border-right: none;
+  }
+}
+// hide week info
+#cal-week-box {
+  display: none;
+}
