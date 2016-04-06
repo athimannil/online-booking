@@ -6,8 +6,7 @@ var gulp = require('gulp'),
     // concat = require('gulp-concat'),
     connect = require('gulp-connect'),
     notify = require("gulp-notify"),
-	prefixer = require('gulp-autoprefixer'),
-	livereload = require('gulp-livereload');
+	prefixer = require('gulp-autoprefixer');
 
 /* One time task start */
 var config = {
@@ -30,13 +29,11 @@ gulp.task('files', function() {
     return gulp.src([
 	    	'resources/**.html'
     	])
-        .pipe(gulp.dest('./public'))
-		.pipe(livereload());
+        .pipe(gulp.dest('./public'));
 });
 gulp.task('connect', function() {
 	connect.server({
 		root: 'public',
-		port: 4000,
 		livereload: true
 	});
 });
@@ -51,8 +48,7 @@ gulp.task('styles', function() {
             browsers: ['last 15 versions'],
             cascade: false
 		}))
-		.pipe(gulp.dest('./public/css'))
-		.pipe(livereload());
+		.pipe(gulp.dest('./public/css'));
 });
 gulp.task('scripts', function(){
 	gulp.src(config.jsPath + '/*.js')
@@ -61,16 +57,14 @@ gulp.task('scripts', function(){
 		}))
 		// .pipe(concat('core.js'))
 		// .pipe(uglify())
-		.pipe(gulp .dest('./public/js'))
-		.pipe(livereload());
+		.pipe(gulp .dest('./public/js'));
 });
 gulp.task('watch', function() {
-	livereload.listen();
 	gulp.watch('resources/**.html', ['files']);
 	gulp.watch(config.jsPath + '/*.js', ['scripts']);
 	gulp.watch(config.sassDir + '/*.scss', ['styles']);
 });
 
 gulp.task('install', ['files', 'bower', 'bowerFiles']);
-gulp.task('default', ['scripts', 'styles', 'watch', 'connect']);
+gulp.task('default', ['scripts', 'styles', 'connect', 'watch']);
 
