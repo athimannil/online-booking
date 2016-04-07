@@ -29,7 +29,8 @@ gulp.task('files', function() {
     return gulp.src([
 	    	'resources/**.html'
     	])
-        .pipe(gulp.dest('./public'));
+        .pipe(gulp.dest('./public'))
+        .pipe(connect.reload());
 });
 gulp.task('connect', function() {
 	connect.server({
@@ -48,7 +49,8 @@ gulp.task('styles', function() {
             browsers: ['last 15 versions'],
             cascade: false
 		}))
-		.pipe(gulp.dest('./public/css'));
+		.pipe(gulp.dest('./public/css'))
+		.pipe(connect.reload());
 });
 gulp.task('scripts', function(){
 	gulp.src(config.jsPath + '/*.js')
@@ -57,7 +59,8 @@ gulp.task('scripts', function(){
 		}))
 		// .pipe(concat('core.js'))
 		// .pipe(uglify())
-		.pipe(gulp .dest('./public/js'));
+		.pipe(gulp .dest('./public/js'))
+		.pipe(connect.reload());
 });
 gulp.task('watch', function() {
 	gulp.watch('resources/**.html', ['files']);

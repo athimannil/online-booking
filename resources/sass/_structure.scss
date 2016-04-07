@@ -1,0 +1,16 @@
+html{
+	height: 100vh;
+}
+body{
+	min-height: 100vh;
+	display: flex;
+	flex-wrap: wrap;
+}
+header,
+footer{
+	flex: 1 1 100%;
+}
+.main-container{
+	width: 100%;
+    min-height: calc(100vh - 50px);
+}
