@@ -10,7 +10,13 @@ header,
 footer{
 	flex: 1 1 100%;
 }
+
+footer{
+  background: $border;
+  color: $white;
+}
+
 .main-container{
 	width: 100%;
-    min-height: calc(100vh - 50px);
+  min-height: calc(100vh - 50px);
 }
