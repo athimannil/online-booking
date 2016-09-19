@@ -22,7 +22,7 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 		.state('booked', {
 			url: "/booked",
 			templateUrl: "booked.html",
-			controller: 'registerCtrl',
+			controller: 'bookedCtrl',
 		})
 		;
 	$urlRouterProvider.otherwise("/");
@@ -244,7 +244,8 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 		// console.log(bookme.yourName);
 		$state.go("booked");
 
-	};
+	};})
+.controller('bookedCtrl', ['$scope','moment', '$state', 'bookme', function($scope, moment, $state, bookme){
 	$scope.callService = function(argument) {
 		// body...
 		// $scope.me = bookme.getRegistration;
@@ -253,7 +254,7 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 		$scope.registerLog = bookme.getRegistration();
 		console.log($scope.register);
 	};
-})
+}])
 .service('bookme', function(){
 	var theUser = {};
 	return{
