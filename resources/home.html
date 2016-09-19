@@ -1,60 +1,64 @@
-<div class="col-sm-10 col-sm-offset-1 box">
-  <script id="customMonthCell.html" type="text/ng-template">
-    <div class="cal-month-day">
-
-      <span
-        class="pull-right"
-        data-cal-date
-        ng-click="vm.calendarCtrl.dateClicked(day.date)"
-        ng-bind="day.label">
-      </span>
-
-      <small style="position: absolute; bottom: 10px; left: 5px">
-        {{ 10 - day.events.length  }} left
-      </small>
-
-    </div>
-  </script>
+<div class="container">
   <div class="row">
-  	<div class="col-sm-12 bg-primary">
-          <button
-            class="btn btn-primary pull-left"
-            mwl-date-modifier
-            date="calendarDate"
-            decrement="calendarView"
-  		  ng-show="isPastMonth(calendarDate)"
-            >
-            <span class="glyphicon glyphicon-arrow-left"></span>
-          </button>
-          <button
-            class="btn btn-primary pull-right"
-            mwl-date-modifier
-            date="calendarDate"
-            increment="calendarView">
-            <span class="glyphicon glyphicon-arrow-right"></span>
-          </button>
-  		<h4 class="text-center">{{calendarTitle}}</h4>
-  	</div>
-  				<!-- on-timespan-click = "dateClicked(calendarCell.events, calendarCell)" -->
-  	<mwl-calendar
-  			view="calendarView"
-  			view-date="calendarDate"
-  		events="bookings"
-  		on-event-click="bookingClicked(calendarEvent)"
-  		view-title="calendarTitle"
+    <div class="col-sm-10 col-sm-offset-1 box">
+      <script id="customMonthCell.html" type="text/ng-template">
+        <div class="cal-month-day">
 
-  		on-timespan-click = "dateClicked(calendarCell)"
-  		
-  		on-event-times-changed="calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
-  		edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
-  		delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'"
-  		on-edit-event-click="eventEdited(calendarEvent)"
-  		on-delete-event-click="eventDeleted(calendarEvent)"
-  		cell-is-open="false"
-  		on-view-change-click="false"
-  		cell-modifier="dayModifier(calendarCell)"
-  			>
-  		<!-- on-view-change-click -->
-  	</mwl-calendar>
+          <span
+            class="pull-right"
+            data-cal-date
+            ng-click="vm.calendarCtrl.dateClicked(day.date)"
+            ng-bind="day.label">
+          </span>
+
+          <small style="position: absolute; bottom: 10px; left: 5px">
+            {{ 10 - day.events.length  }} left
+          </small>
+
+        </div>
+      </script>
+      <div class="row">
+      	<div class="col-sm-12 bg-primary">
+              <button
+                class="btn btn-primary pull-left"
+                mwl-date-modifier
+                date="calendarDate"
+                decrement="calendarView"
+      		  ng-show="isPastMonth(calendarDate)"
+                >
+                <span class="glyphicon glyphicon-arrow-left"></span>
+              </button>
+              <button
+                class="btn btn-primary pull-right"
+                mwl-date-modifier
+                date="calendarDate"
+                increment="calendarView">
+                <span class="glyphicon glyphicon-arrow-right"></span>
+              </button>
+      		<h4 class="text-center">{{calendarTitle}}</h4>
+      	</div>
+      				<!-- on-timespan-click = "dateClicked(calendarCell.events, calendarCell)" -->
+      	<mwl-calendar
+      			view="calendarView"
+      			view-date="calendarDate"
+      		events="bookings"
+      		on-event-click="bookingClicked(calendarEvent)"
+      		view-title="calendarTitle"
+
+      		on-timespan-click = "dateClicked(calendarCell)"
+      		
+      		on-event-times-changed="calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
+      		edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
+      		delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'"
+      		on-edit-event-click="eventEdited(calendarEvent)"
+      		on-delete-event-click="eventDeleted(calendarEvent)"
+      		cell-is-open="false"
+      		on-view-change-click="false"
+      		cell-modifier="dayModifier(calendarCell)"
+      			>
+      		<!-- on-view-change-click -->
+      	</mwl-calendar>
+      </div>
+    </div>
   </div>
 </div>
