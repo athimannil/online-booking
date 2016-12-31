@@ -49,75 +49,10 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 	console.log("hello mate");
 }])
 .controller('homeCtrl', ['$scope', 'moment', '$state', 'bookme', 'bookingService', function($scope, moment, $state, bookme, bookingService){
-	$scope.isPastMonth = function  (thisMonth) {
-		return moment(thisMonth).isAfter(moment(), 'month');
-	};
-	// Monday week start
-	moment.locale('en', {
-	  week : {
-	    dow : 1 // Monday is the first day of the week
-	  }
-	});
-	$scope.bookingPerDay = 5;
-	var mySchedule = this;
-	$scope.isCellOpen = true; // not working yet
 	$scope.calendarView = 'month';
-	$scope.calendarDate = new Date();
-	$scope.bookings = [
-		{
-			title: 'Hello mate',
-			type: 'info',
-			// startsAt: new Date(moment().locale("en").add(18, 'd').format("MMM DD, YYYY HH:MM")),
-			startsAt: moment().toDate(),
-			// startsAt: moment('2012-12-12', "YYYY-MM-DD").toDate(),
-			// startsAt: new Date(2016,1,3, 1),
-			// endsAt: new Date(moment().locale("en").add(18, 'd').format("MMM DD, YYYY HH:MM")),
-			endsAt: moment().toDate(),
-			// endsAt: moment('2012-12-12', "YYYY-MM-DD").toDate(),
-			// endsAt: new Date(2016,1,3, 1),
-
-			editable: true,
-			deletable: false,
-			draggable: false,
-			resizable: false,
-			incrementsBadgeTotal: true,
-			cssClass: 'a-css-class-name'
-		},{
-			title: 'Today is todate()',
-			type: 'info',
-			startsAt: moment().add(1, 'hours').toDate(),
-			endsAt: moment().add(1, 'hours').toDate(),
-			editable: true,
-			deletable: false,
-			draggable: true,
-			resizable: true,
-			incrementsBadgeTotal: true,
-			cssClass: 'a-css-class-name'
-		},{
-			title: 'Today is saturday',
-			type: 'info',
-			startsAt: moment().add(2, 'hours').toDate(),
-			endsAt: moment().add(2, 'hours').toDate(),
-			editable: true,
-			deletable: false,
-			draggable: true,
-			resizable: true,
-			incrementsBadgeTotal: true,
-			cssClass: 'a-css-class-name'
-		},{
-			title: 'Today is saturday',
-			type: 'info',
-			startsAt: moment().add(3, 'hours').toDate(),
-			endsAt: moment().add(3, 'hours').toDate(),
-			editable: true,
-			deletable: false,
-			draggable: true,
-			resizable: true,
-			incrementsBadgeTotal: true,
-			cssClass: 'a-css-class-name'
-		}
-	];
-
+	$scope.viewDate = new Date();
+	$scope.events = [{}];
+	$scope.bookingDates = [{}];
 
 	// Click on event in slide
 	$scope.bookingClicked = function(theBooking){
@@ -153,19 +88,13 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 	activate();
     function activate() {
         return getBooking().then(function() {
-            // logger.info('Activated Avengers View');
-          //   console.log('Activated Avengers View');
-
-            // $scope.bookingDates = JSON.parse(JSON.stringify($scope.bookingDates).split('"day":').join('"startsAt":'));
-
-
             for (var i = 0; i < $scope.bookingDates.length; i++) {
                 // alert(result.d[i].employeename);
               //   console.log($scope.bookingDates[i].day);
                 $scope.bookingDates[i].startsAt = new Date($scope.bookingDates[i].day);
             }
 
-          //   console.log($scope.bookingDates);
+            console.log($scope.bookingDates);
             // document.write(JSON.stringify(json));
             $scope.events = $scope.bookingDates;
         });
@@ -173,7 +102,7 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
             return bookingService.getBooking()
                 .then(function(data) {
                     $scope.bookingDates = data['current_schedules'];
-                    console.log($scope.bookingDates);
+                    // console.log($scope.bookingDates);
                     return $scope.bookingDates;
                 });
         }
