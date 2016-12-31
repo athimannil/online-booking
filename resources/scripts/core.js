@@ -4,20 +4,21 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 
 	// Now set up the states
 	$stateProvider
-		.state('/', {
+		.state('calander', {
 			url: "/",
 			templateUrl: "home.html",
             controller: 'homeCtrl',
 		})
+		.state('register', {
+			url: "/{registerDay}",
+			templateUrl: "register.html",
+			controller: 'registerCtrl',
+		})
+
 		.state('time', {
 			url: "/time",
 			templateUrl: "time.html",
             controller: 'timeCtrl',
-		})
-		.state('register', {
-			url: "/register",
-			templateUrl: "register.html",
-			controller: 'registerCtrl',
 		})
 		.state('booked', {
 			url: "/booked",
@@ -26,24 +27,6 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 		})
 		;
 	$urlRouterProvider.otherwise("/");
-  //   .state('state1.list', {
-  //     url: "/list",
-  //     templateUrl: "partials/state1.list.html",
-  //     controller: function($scope) {
-  //       $scope.items = ["A", "List", "Of", "Items"];
-  //     }
-  //   })
-  //   .state('state2', {
-  //     url: "/state2",
-  //     templateUrl: "partials/state2.html"
-  //   })
-  //   .state('state2.list', {
-  //     url: "/list",
-  //     templateUrl: "partials/state2.list.html",
-  //     controller: function($scope) {
-  //       $scope.things = ["A", "Set", "Of", "Things"];
-  //     }
-  //   });
 })
 .controller('mainCtrl', ['$scope', function($scope){
 	console.log("hello mate");
@@ -54,36 +37,17 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 	$scope.events = [{}];
 	$scope.bookingDates = [{}];
 
-	// Click on event in slide
-	$scope.bookingClicked = function(theBooking){
-		console.clear();
-		console.log("This is your booking you clicked");
-		console.log(theBooking);
-	};
 	// Click on calendar date
-	$scope.dateClicked = function(theBooking){
-		// console.clear();
-		// console.log(theBooking);
-		// console.log(theBooking.date);
-		// console.log(moment(theBooking.date).format());
-		// console.log(moment(theBooking.date).toDate());
-		// console.log("hello mate");
-		// console.log(theBooking.events);
-		// console.log(theBooking.events.length);
-		// $state.go("time");
-
-		// console.log(bookme.addDate({'appointmentDate': moment(theBooking.date).format()}));
-		// console.log(bookme.addDate(moment(theBooking.date).format()));
-		bookme.addDate(moment(theBooking.date).utc().format());
-		$state.go("register");
+	$scope.dateClicked = function(event){
+		console.clear();
+		if (event.events.length && event.events[0].is_holiday == 0 && event.isPast != true) {
+            // var theDate = moment(event.events[0].day).format("YYYY-MM-DD");
+            var theDate = moment(event.date).format("YYYY-MM-DD");
+			$state.go("register", {registerDay: theDate});
+        } else {
+            console.log("The day is holiday or NO event in this day");
+        }
 	};
-
-	// custom texts
-	/*calendarConfig.templates.calendarMonthCell = 'customMonthCell.html';
-	$scope.$on('$destroy', function($scope) {
-		calendarConfig.templates.calendarMonthCell = 'mwl/calendarMonthCell.html';
-	});*/
-
 
 	activate();
     function activate() {
@@ -108,6 +72,32 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
         }
     }
 }])
+
+.controller('registerCtrl', function ($scope, moment, $stateParams, $state, bookme) {
+	console.log('👇');
+	console.clear();
+    console.log($stateParams.registerDay);
+	$scope.register = {};
+	var thisDay = $stateParams.registerDay;
+	if (moment(thisDay, "YYYY-MM-DD", true).isValid()) {
+        console.log("it is valid date");
+        $scope.register.doc_id = 1;
+        $scope.register.date = thisDay;
+    } else {
+        console.log("go back and choose valid date");
+    }
+})
+
+
+
+
+
+
+
+
+
+
+
 .controller('timeCtrl', function ($scope, moment, $state) {
 	$scope.availableBookings = [
 		{
@@ -160,28 +150,6 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 		}
 	};
 })
-.controller('registerCtrl', function ($scope, moment, $state, bookme) {
-	console.log('👇');
-	console.log(bookme.getRegistration());
-	// $scope.bookedDate = bookme.getRegistration();
-	// if (!$scope.bookedDate.appointmentDate) {
-		// $state.go("/");
-	// }
-	// console.log(moment('12-12-2020', 'DD-MM-YYYY').isValid());
-	$scope.registerMe = function (argument) {
-		// merge dob to one string
-		$scope.register.dob = moment(new Date($scope.register.db.day + ' ' + $scope.register.db.month + ' ' + $scope.register.db.year)).utc().format();
-		// console.log($scope.register.dob);
-		// console.log('👉 ' + $scope.register.dob);
-
-		// delete $scope.register.db;
-		// console.log($scope.register);
-
-		bookme.addRegistration($scope.register);
-		// console.log(bookme.yourName);
-		$state.go("booked");
-
-	};})
 .controller('bookedCtrl', ['$scope','moment', '$state', 'bookme', function($scope, moment, $state, bookme){
 	$scope.callService = function(argument) {
 		// body...
