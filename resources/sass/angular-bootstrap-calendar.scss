@@ -532,7 +532,7 @@ a.cal-event-week {
 
 
 // custom
-.cal-month-box [class*=cal-cell], 
+.cal-month-box [class*=cal-cell],
 .cal-year-box [class*=span]{
   min-height: 80px;
   /*border-right: 1px solid #bbbfcb;*/
@@ -558,4 +558,32 @@ span[data-cal-date]{
 // hide week info
 #cal-week-box {
   display: none;
+}
+
+.custom-cell{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right: 5px;
+    padding-left: 5px;
+
+    &.custom-cell-disabled{
+        cursor: not-allowed;
+        &:hover{
+            background-color: $white;
+            background-color: #fafafa;
+        }
+    }
+
+    .custom-cell-day{
+        align-self: flex-end;
+        color: #999;
+        margin-top: 10px;
+    }
+
+    .custom-cell-info{
+        padding: 5px;
+        line-height: 1.2;
+        border-radius: 2px;
+    }
 }

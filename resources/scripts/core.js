@@ -48,7 +48,7 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 .controller('mainCtrl', ['$scope', function($scope){
 	console.log("hello mate");
 }])
-.controller('homeCtrl', ['$scope','moment', '$state', 'bookme', function($scope, moment, $state, bookme){
+.controller('homeCtrl', ['$scope', 'moment', '$state', 'bookme', 'bookingService', function($scope, moment, $state, bookme, bookingService){
 	$scope.isPastMonth = function  (thisMonth) {
 		return moment(thisMonth).isAfter(moment(), 'month');
 	};
@@ -148,6 +148,36 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 	$scope.$on('$destroy', function($scope) {
 		calendarConfig.templates.calendarMonthCell = 'mwl/calendarMonthCell.html';
 	});*/
+
+
+	activate();
+    function activate() {
+        return getBooking().then(function() {
+            // logger.info('Activated Avengers View');
+          //   console.log('Activated Avengers View');
+
+            // $scope.bookingDates = JSON.parse(JSON.stringify($scope.bookingDates).split('"day":').join('"startsAt":'));
+
+
+            for (var i = 0; i < $scope.bookingDates.length; i++) {
+                // alert(result.d[i].employeename);
+              //   console.log($scope.bookingDates[i].day);
+                $scope.bookingDates[i].startsAt = new Date($scope.bookingDates[i].day);
+            }
+
+          //   console.log($scope.bookingDates);
+            // document.write(JSON.stringify(json));
+            $scope.events = $scope.bookingDates;
+        });
+        function getBooking() {
+            return bookingService.getBooking()
+                .then(function(data) {
+                    $scope.bookingDates = data['current_schedules'];
+                    console.log($scope.bookingDates);
+                    return $scope.bookingDates;
+                });
+        }
+    }
 }])
 .controller('timeCtrl', function ($scope, moment, $state) {
 	$scope.availableBookings = [
@@ -254,3 +284,50 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 		}
 	};
 });
+
+angular
+	.module('myApp')
+	.factory('bookingService', bookingService);
+
+// bookingService.$inject = ['$http', 'logger'];
+bookingService.$inject = ['$http'];
+
+// function bookingService($http, logger) {
+function bookingService($http) {
+	return {
+		getBooking: getBooking,
+		updateBooking: updateBooking
+	};
+
+	function getBooking() {
+		return $http.get('http://booking.startcode.in/admin/current-schedule/1')
+			.then(getBookingComplete)
+			.catch(getBookingFailed);
+
+		function getBookingComplete(response) {
+			return response.data;
+			// return response;
+		}
+
+		function getBookingFailed(error) {
+			// logger.error('XHR Failed for getBooking.' + error.data);
+		}
+	}
+
+	function updateBooking(theData) {
+		return $http.post('http://booking.startcode.in/appointment', theData)
+			.then(updateBookingComplete)
+			.catch(updateBookingFailed);
+
+		function updateBookingComplete(response) {
+			// return response.data;
+			// return response;
+			console.log(response);
+		}
+
+		function updateBookingFailed(error) {
+			// logger.error('XHR Failed for updateBooking.' + error.data);
+		}
+	}
+
+}
