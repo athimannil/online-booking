@@ -73,7 +73,7 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
     }
 }])
 
-.controller('registerCtrl', function ($scope, moment, $stateParams, $state, bookme) {
+.controller('registerCtrl', function ($scope, moment, $stateParams, $state, bookme, scheduleService) {
 	console.log('👇');
 	console.clear();
     console.log($stateParams.registerDay);
@@ -86,17 +86,52 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
     } else {
         console.log("go back and choose valid date");
     }
+	// console.log(bookme.getRegistration());
+	// $scope.bookedDate = bookme.getRegistration();
+	// if (!$scope.bookedDate.appointmentDate) {
+		// $state.go("/");
+	// }
+	// console.log(moment('12-12-2020', 'DD-MM-YYYY').isValid());
+
+	$scope.registerMe = function (argument) {
+		// merge dob to one string
+		$scope.register.dob = moment(new Date($scope.register.db.day + ' ' + $scope.register.db.month + ' ' + $scope.register.db.year)).utc().format("YYYY-MM-DD");
+		// $scope.register.dob = moment(new Date($scope.register.db.day + ' ' + $scope.register.db.month + ' ' + $scope.register.db.year)).utc().format();
+		// console.log($scope.register.dob);
+		// console.log('👉 ' + $scope.register.dob);
+
+		delete $scope.register.db;
+		console.log($scope.register);
+
+		// bookme.addRegistration($scope.register);
+		// console.log(bookme.yourName);
+		// $state.go("booked");
+		update($scope.register);
+	};
+
+	function update(theData) {
+        return updateSchedule(theData).then(function() {
+            // logger.info('Activated Avengers View');
+            // console.log('update schedule');
+        });
+        function updateSchedule() {
+            return scheduleService.updateSchedule(theData)
+                .then(function(data) {
+                    console.log(data);
+                    console.log(data.status);
+                    if (data.status == 200) {
+                        // alert("Successful");
+                        $state.go('schedule');
+                    } else {
+                        alert("Error");
+                    }
+                    // console.log("update schedule");
+                    // $ctrl.schedules = data;
+                    // return $ctrl.schedules;
+                });
+        }
+    }
 })
-
-
-
-
-
-
-
-
-
-
 
 .controller('timeCtrl', function ($scope, moment, $state) {
 	$scope.availableBookings = [
@@ -150,6 +185,7 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 		}
 	};
 })
+
 .controller('bookedCtrl', ['$scope','moment', '$state', 'bookme', function($scope, moment, $state, bookme){
 	$scope.callService = function(argument) {
 		// body...
@@ -227,4 +263,36 @@ function bookingService($http) {
 		}
 	}
 
+}
+
+angular
+	.module('myApp')
+	.factory('scheduleService', scheduleService);
+
+// scheduleService.$inject = ['$http', 'logger'];
+scheduleService.$inject = ['$http'];
+
+// function scheduleService($http, logger) {
+function scheduleService($http) {
+	return {
+		updateSchedule: updateSchedule
+	};
+
+	function updateSchedule(theData) {
+		return $http.post('http://booking.startcode.in/appointment', theData)
+			.then(updateScheduleComplete)
+			.catch(updateScheduleFailed);
+
+		function updateScheduleComplete(response) {
+			// return response.data;
+		  //   console.log(response);
+			return response;
+		}
+
+		function updateScheduleFailed(error) {
+			console.log(error);
+			return error;
+			// logger.error('XHR Failed for updateSchedule.' + error.data);
+		}
+	}
 }
