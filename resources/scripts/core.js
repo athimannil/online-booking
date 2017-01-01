@@ -88,9 +88,8 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
         console.log("it is valid date");
         $scope.register.doc_id = 1;
         $scope.register.date = thisDay;
-		// Register
 		$scope.bookingStatus = "register";
-		$scope.bookedDateTime = "hello mate";
+		$scope.bookedDateTime = "";
     } else {
         console.log("go back and choose valid date");
 		$scope.bookingStatus = "notavailable";
@@ -106,15 +105,9 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 		// merge dob to one string
 		$scope.register.dob = moment(new Date($scope.register.db.day + ' ' + $scope.register.db.month + ' ' + $scope.register.db.year)).utc().format("YYYY-MM-DD");
 		// $scope.register.dob = moment(new Date($scope.register.db.day + ' ' + $scope.register.db.month + ' ' + $scope.register.db.year)).utc().format();
-		// console.log($scope.register.dob);
-		// console.log('👉 ' + $scope.register.dob);
 
 		delete $scope.register.db;
 		console.log($scope.register);
-
-		// bookme.addRegistration($scope.register);
-		// console.log(bookme.yourName);
-		// $state.go("booked");
 		update($scope.register);
 	};
 
@@ -126,10 +119,9 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
         function updateSchedule() {
             return scheduleService.updateSchedule(theData)
                 .then(function(data) {
-                    // console.log(data);
+					console.log(data);
+                    console.log(data.status);
                     if (data.status == 200) {
-						console.log(data.data);
-						console.log(data.status);
 						$scope.bookingStatus = "confirmed";
 						$scope.bookedDateTime = data.data.date_time;
 						console.log($scope.bookedDateTime);
