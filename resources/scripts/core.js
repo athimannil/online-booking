@@ -131,7 +131,7 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
                         // alert("Successful");
                         // $state.go('schedule');
                     } else {
-                        alert("Error");
+                        $scope.bookingStatus = "notavailable";
                     }
                     // console.log("update schedule");
                     // $ctrl.schedules = data;
