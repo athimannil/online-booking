@@ -40,7 +40,12 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 	// Click on calendar date
 	$scope.dateClicked = function(event){
 		console.clear();
-		if (event.events.length && event.events[0].is_holiday == 0 && event.isPast != true) {
+		if (
+			event.events.length &&
+			event.events[0].is_holiday == 0 &&
+			event.isPast != true &&
+			event.events[0].remaining_appointments != 0
+		) {
             // var theDate = moment(event.events[0].day).format("YYYY-MM-DD");
             var theDate = moment(event.date).format("YYYY-MM-DD");
 			$state.go("register", {registerDay: theDate});
