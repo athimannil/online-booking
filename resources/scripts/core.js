@@ -83,8 +83,12 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
         console.log("it is valid date");
         $scope.register.doc_id = 1;
         $scope.register.date = thisDay;
+		// Register
+		$scope.bookingStatus = "register";
+		$scope.bookedDateTime = "hello mate";
     } else {
         console.log("go back and choose valid date");
+		$scope.bookingStatus = "notavailable";
     }
 	// console.log(bookme.getRegistration());
 	// $scope.bookedDate = bookme.getRegistration();
@@ -117,11 +121,15 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
         function updateSchedule() {
             return scheduleService.updateSchedule(theData)
                 .then(function(data) {
-                    console.log(data);
-                    console.log(data.status);
+                    // console.log(data);
                     if (data.status == 200) {
+						console.log(data.data);
+						console.log(data.status);
+						$scope.bookingStatus = "confirmed";
+						$scope.bookedDateTime = data.data.date_time;
+						console.log($scope.bookedDateTime);
                         // alert("Successful");
-                        $state.go('schedule');
+                        // $state.go('schedule');
                     } else {
                         alert("Error");
                     }
