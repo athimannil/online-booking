@@ -39,14 +39,19 @@
 </div>
 
 <script id="customMonthCell.html" type="text/ng-template">
-    <div class="cal-month-day custom-cell" ng-class="{'custom-cell-disabled': day.isPast || day.events[0].remaining_appointments == 0}">
+    <div class="cal-month-day custom-cell"
+        ng-class="{
+            'custom-cell-disabled': day.isPast || day.events[0].remaining_appointments == 0,
+            'hidden-xs' : day.inMonth == false
+            }"
+        >
         <h3
             class="custom-cell-day"
             data-cal-date
             ng-click="vm.calendarCtrl.dateClicked(day.date)"
-            ng-bind="day.label">
+            >{{day.label}}<small class="visible-xs-inline-block">{{ day.date.format('dddd') }}</small>
         </h3>
-        <div ng-if="!day.isPast">
+        <div class="day-info" ng-if="!day.isPast">
             <div ng-if="day.events[0].is_holiday == 0 && day.events[0].remaining_appointments != 0">
                 <h6 class="bg-success custom-cell-info">Remaining {{day.events[0].remaining_appointments}}</strong></h6>
             </div>

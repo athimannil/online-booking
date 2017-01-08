@@ -24,11 +24,11 @@
 }
 .cal-row-fluid [class*="cal-cell"] {
   display: block;
-  width: 100%;
+  /* width: 100%; */
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  float: left;
+  /* float: left; */
   margin-left: 0%;
   *margin-left: -0.05213764%;
 }
@@ -63,8 +63,8 @@
   *width: 28.518123667377395%;
 }
 .cal-row-fluid .cal-cell1 {
-  width: 14.285714285714285%;
-  *width: 14.232409381663112%;
+  /* width: 14.285714285714285%; */
+  /* *width: 14.232409381663112%; */
 }
 .cal-week-box .cal-offset7,
 .cal-row-fluid .cal-offset7,
@@ -109,8 +109,8 @@
   *margin-left: 14.17910447761194%;
 }
 .cal-row-fluid .cal-cell1 {
-  width: 14.285714285714285%;
-  *width: 14.233576642335766%;
+  /* width: 14.285714285714285%; */
+  /* *width: 14.233576642335766%; */
 }
 [class*="cal-cell"].hide,
 .cal-row-fluid [class*="cal-cell"].hide {
@@ -371,7 +371,8 @@
   background-color: #fafafa;
 }
 .cal-month-day {
-  height: 100px;
+  /* height: 100px; */
+  min-height: 100px;
 }
 [class*="cal-cell"]:hover,
 .cell-focus,
@@ -383,7 +384,7 @@
 }
 .cal-year-box [class*="span"],
 .cal-month-box [class*="cal-cell"] {
-  min-height: 100px;
+  /* min-height: 100px; */
   border-right: 1px solid #e1e1e1;
   position: relative;
 }
@@ -532,34 +533,64 @@ a.cal-event-week {
 
 
 // custom
-.cal-month-box [class*=cal-cell],
+/* .cal-month-box [class*=cal-cell],
 .cal-year-box [class*=span]{
   min-height: 80px;
-  /*border-right: 1px solid #bbbfcb;*/
-}
-span[data-cal-date]{
+  border-right: 1px solid #bbbfcb;
+} */
+/* span[data-cal-date]{
   margin-top: 10px;
   margin-right: 10px;
   font-size: 18px;
 }
-.cal-month-day{
+ */
+ /* .cal-month-day{
   height: 80px;
 }
-
+ */
 // Calendar left & right border
-.cal-month-box{
+/* .cal-month-box{
   border-left: none;
-}
-.cal-before-eventlist{
+} */
+/* .cal-before-eventlist{
   .cal-cell:last-child{
     border-right: none;
   }
 }
-// hide week info
+ */
+
+/* Customisation */
+.cal-row-fluid{
+    display: flex;
+    @media (max-width: $screen-sm-min) {
+        flex-direction: column;
+        &.cal-row-head{
+            display: none;
+        }
+    }
+    @media (min-width: $screen-sm-min) {
+        border-bottom: none;
+    }
+    .cal-cell1{
+        @media (min-width: $screen-sm-min) {
+            flex-basis: 100%;
+        }
+    }
+}
+.cal-month-box{
+    .cal-row-fluid{
+        .cal-cell1{
+            @media (max-width: $screen-sm-min) {
+                border-bottom: 1px solid #e1e1e1;
+            }
+        }
+    }
+}
+
+ // hide week info
 #cal-week-box {
   display: none;
 }
-
 .custom-cell{
     display: flex;
     flex-direction: column;
@@ -576,9 +607,15 @@ span[data-cal-date]{
     }
 
     .custom-cell-day{
-        align-self: flex-end;
+        @media (min-width: $screen-sm-min) {
+            align-self: flex-end;
+        }
         color: #999;
         margin-top: 10px;
+    }
+
+    .day-info{
+        flex: 1;
     }
 
     .custom-cell-info{
