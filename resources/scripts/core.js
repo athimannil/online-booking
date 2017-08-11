@@ -1,4 +1,4 @@
-angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMoment'])
+var app = angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMoment'])
 .config(function($stateProvider, $urlRouterProvider) {
 	// For any unmatched url, redirect to /state1
 
@@ -51,6 +51,7 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 			$state.go("register", {registerDay: theDate});
         } else {
             console.log("The day is holiday or NO event in this day");
+            $state.go("register", {registerDay: moment(event.date).format("YYYY-MM-DD")});
         }
 	};
 
@@ -100,6 +101,10 @@ angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', 'angularMom
 		// $state.go("/");
 	// }
 	// console.log(moment('12-12-2020', 'DD-MM-YYYY').isValid());
+
+    $scope.sendForm = function() {
+      alert('form sent');
+    };
 
 	$scope.registerMe = function (argument) {
 		// merge dob to one string
@@ -301,3 +306,48 @@ function scheduleService($http) {
 		}
 	}
 }
+
+
+
+app.directive('validSubmit', ['$parse', function ($parse) {
+    return {
+        // we need a form controller to be on the same element as this directive
+        // in other words: this directive can only be used on a &lt;form&gt;
+        require: 'form',
+        // one time action per form
+        link: function (scope, element, iAttrs, form) {
+            form.$submitted = false;
+            // get a hold of the function that handles submission when form is valid
+            var fn = $parse(iAttrs.validSubmit);
+
+            // register DOM event handler and wire into Angular's lifecycle with scope.$apply
+            element.on('submit', function (event) {
+                scope.$apply(function () {
+                    // on submit event, set submitted to true (like the previous trick)
+                    form.$submitted = true;
+                    // if form is valid, execute the submission handler function and reset form submission state
+                    if (form.$valid) {
+                        fn(scope, { $event: event });
+                        form.$submitted = false;
+                    }
+                });
+            });
+
+            element.find('.form-group').each(function () {
+                var formGroup = $(this);
+                var inputs = formGroup.find('input[ng-model],textarea[ng-model],select[ng-model]');
+                if (inputs.length > 0) {
+                    inputs.each(function () {
+                        var input = $(this);
+
+                        scope.$watch(function () {
+                            return input.hasClass('ng-invalid') && (!input.hasClass('ng-pristine') || form.$submitted);
+                        }, function (isInvalid) {
+                            formGroup.toggleClass('has-error', isInvalid);
+                        });
+                    });
+                }
+            });
+        }
+    };
+}]);

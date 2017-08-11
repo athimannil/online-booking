@@ -9,7 +9,7 @@
               <div class="panel-body">
               <div class="row">
                   <div class="col-sm-12">
-                      <form class="form-horizontal" ng-submit="registerMe()">
+                      <form class="form-horizontal" name="bookform" valid-submit="registerMe()" novalidate>
                           <input type="hidden" class="form-control" placeholder="Name" ng-model="register.doc_id" required>
                           <div class="form-group">
                               <label class="col-sm-2 col-md-4 control-label">Date</label>
@@ -17,19 +17,28 @@
                                   <h4>{{register.date | amDateFormat:'D MMMM YYYY, dddd'}}</h4>
                               </div>
                           </div>
-                          <div class="form-group">
+                          <div class="form-group" ng-class="{
+                                  'has-error': bookform.$submitted && bookform.name.$invalid,
+                                  'has-success': bookform.$submitted && bookform.name.$valid}">
                               <label class="col-sm-2 col-md-4 control-label">Name</label>
                               <div class="col-sm-10 col-md-4">
-                                  <input type="text" class="form-control" placeholder="Name" ng-model="register.name" required autofocus>
+                                  <input type="text" name="name" class="form-control" placeholder="Name" ng-model="register.name" required autofocus>
+                                  <span class="validation-error" ng-show="bookform.$submitted && bookform.name.$error.required">Please enter valid name.</span>
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-md-4 control-label">Date of birth</label>
                               <div class="col-sm-10 col-md-4">
-                                  <div class="row">
-                                      <div class="col-xs-3">
+                                  <div class="row register-dob" ng-class="{
+                                    'has-error': bookform.$submitted && bookform.day.$invalid,
+                                    'has-error': bookform.$submitted && bookform.month.$invalid,
+                                    'has-error': bookform.$submitted && bookform.year.$invalid}">
+                                      <div class="col-xs-3" ng-class="{
+                                              'has-error': bookform.$submitted && bookform.day.$invalid,
+                                              'has-success': bookform.$submitted && bookform.day.$valid}">
                                           <input
                                               type="number"
+                                              name="day"
                                               class="form-control"
                                               ng-model="register.db.day"
                                               maxlength="2"
@@ -40,8 +49,10 @@
                                               required
                                               >
                                       </div>
-                                      <div class="col-xs-5">
-                                          <select class="form-control" ng-model="register.db.month" required>
+                                      <div class="col-xs-5 register-month" ng-class="{
+                                              'has-error': bookform.$submitted && bookform.month.$invalid,
+                                              'has-success': bookform.$submitted && bookform.month.$valid}">
+                                          <select name="month" class="form-control" ng-model="register.db.month" required>
                                               <option value="" disabled selected hidden>Month</option>
                                               <option value="january">January</option>
                                               <option value="february">February</option>
@@ -57,40 +68,65 @@
                                               <option value="december">December</option>
                                           </select>
                                       </div>
-                                      <div class="col-xs-4">
+                                      <div class="col-xs-4" ng-class="{
+                                              'has-error': bookform.$submitted && bookform.year.$invalid,
+                                              'has-success': bookform.$submitted && bookform.year.$valid}">
+                                          <!-- TODO year maximum till this year -->
                                           <input
                                               type="number"
+                                              name="year"
                                               class="form-control"
                                               ng-model="register.db.year"
+                                              min="1900"
+                                              max="2017"
                                               maxlength="4"
                                               placeholder="Year"
                                               required
                                               >
                                       </div>
+                                      <div class="col-xs-12" ng-class="{
+                                              'has-error': bookform.$submitted && bookform.day.$invalid,
+                                              'has-error': bookform.$submitted && bookform.month.$invalid,
+                                              'has-error': bookform.$submitted && bookform.year.$invalid,
+                                              'has-success': bookform.$submitted && bookform.day.$valid && bookform.month.$valid && bookform.year.$valid}">
+                                        <span class="validation-error" ng-show="bookform.$submitted && bookform.day.$error.required">Please enter valid date.</span>
+                                        <span class="validation-error" ng-show="bookform.$submitted && bookform.month.$error.required">Please enter valid month.</span>
+                                        <span class="validation-error" ng-show="bookform.$submitted && bookform.year.$error.required">Please enter valid year.</span>
+                                      </div>
                                   </div>
                               </div>
                           </div>
-                          <div class="form-group">
+                          <div class="form-group" ng-class="{
+                                  'has-error': bookform.$submitted && bookform.mobile.$invalid,
+                                  'has-success': bookform.$submitted && bookform.mobile.$valid}">
                               <label class="col-sm-2 col-md-4 control-label">Mobile</label>
                               <div class="col-sm-10 col-md-4">
-                                  <input type="text" class="form-control" placeholder="Mobile" ng-model="register.mobile" required>
+                                  <input type="text" name="mobile" class="form-control" placeholder="Mobile" ng-model="register.mobile" required>
+                                  <span class="validation-error" ng-show="bookform.$submitted && bookform.number.$error.required">Please enter valid mobile number.</span>
                               </div>
                           </div>
-                          <div class="form-group">
+                          <div class="form-group" ng-class="{
+                                  'has-error': bookform.$submitted && bookform.email.$invalid,
+                                  'has-success': bookform.$submitted && bookform.email.$valid}">
                               <label class="col-sm-2 col-md-4 control-label">Email</label>
                               <div class="col-sm-10 col-md-4">
-                                  <input type="email" class="form-control" placeholder="Email" ng-model="register.email" required>
+                                  <input type="email" name="email" class="form-control" placeholder="Email" ng-model="register.email" required>
+                                  <span class="validation-error" ng-show="bookform.$submitted && bookform.email.$error.required">Please enter valid email.</span>
                               </div>
                           </div>
-                          <div class="form-group">
+                          <div class="form-group" ng-class="{
+                                  'has-error': bookform.$submitted && bookform.address.$invalid,
+                                  'has-success': bookform.$submitted && bookform.address.$valid}">
                               <label class="col-sm-2 col-md-4 control-label">Address</label>
                               <div class="col-sm-10 col-md-4">
-                                  <input type="text" class="form-control" placeholder="Address" ng-model="register.address" required>
+                                  <input type="text" name="address" class="form-control" placeholder="Address" ng-model="register.address" required>
+                                  <span class="validation-error" ng-show="bookform.$submitted && bookform.address.$error.required">Please enter valid address.</span>
                               </div>
                           </div>
                           <div class="form-group">
                               <div class="col-sm-offset-4 col-sm-10 col-md-4">
-                                  <button type="submit" class="btn btn-primary">Book Appointment</button>
+                                <!-- TODO ng-disabled="(form.$submitted && form.$invalid)" -->
+                                  <button type="submit" class="btn btn-primary" ng-disabled="(form.$submitted && form.$invalid)">Book Appointment</button>
                               </div>
                           </div>
                       </form>

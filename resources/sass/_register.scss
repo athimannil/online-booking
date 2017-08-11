@@ -1,0 +1,40 @@
+.register-dob{
+  input[type=number]{
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+  .register-month{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  &.has-error{
+    // background-color: $brand-danger;
+  }
+}
+
+.has-error {
+
+  .form-control{
+    border-width: 2px;
+    border-color: #ff6464;
+    border-color: $brand-danger;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    &:focus{
+      border-color: #ff6464;
+      box-shadow: none;
+    }
+  }
+
+  .validation-error{
+    display: block;
+    background-color: $brand-danger;
+    color: $white;
+    padding: 4px 8px;
+    font-size: 12px;
+    &:last-child{
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+  }
+}
