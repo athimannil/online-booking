@@ -1,5 +1,9 @@
 .register-wrap{
   padding: 15px 20px;
+
+  // margin-top: 20px;
+  margin-bottom: 20px;
+
   h3{
     margin-top: 0;
   }
@@ -44,5 +48,15 @@
       border-bottom-left-radius: 4px;
       border-bottom-right-radius: 4px;
     }
+  }
+}
+
+.confirmation-wrap{
+  display: flex;
+  .confirmation-detail{
+    flex: 1;
+  }
+  .confirmation-name{
+    flex: 2;
   }
 }

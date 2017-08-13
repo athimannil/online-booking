@@ -82,19 +82,19 @@ var app = angular.module('myApp', ['ui.router','ui.bootstrap', 'mwl.calendar', '
 .controller('registerCtrl', function ($scope, moment, $stateParams, $state, bookme, scheduleService) {
 	console.log('👇');
 	console.clear();
-    console.log($stateParams.registerDay);
+  console.log($stateParams.registerDay);
 	$scope.register = {};
 	var thisDay = $stateParams.registerDay;
 	if (moment(thisDay, "YYYY-MM-DD", true).isValid()) {
-        console.log("it is valid date");
-        $scope.register.doc_id = 1;
-        $scope.register.date = thisDay;
-		$scope.bookingStatus = "register";
-		$scope.bookedDateTime = "";
-    } else {
-        console.log("go back and choose valid date");
-		$scope.bookingStatus = "notavailable";
-    }
+    console.log("it is valid date");
+    $scope.register.doc_id = 1;
+    $scope.register.date = thisDay;
+    $scope.bookingStatus = "register";
+    $scope.bookedDateTime = "";
+  } else {
+    console.log("go back and choose valid date");
+    $scope.bookingStatus = "notavailable";
+  }
 	// console.log(bookme.getRegistration());
 	// $scope.bookedDate = bookme.getRegistration();
 	// if (!$scope.bookedDate.appointmentDate) {
