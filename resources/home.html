@@ -1,37 +1,39 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
+    <div class="col-xs-12 secondary-header"></div>
+  </div>
+</div>
+<div class="container">
     <div class="col-sm-10 col-sm-offset-1 box">
-      <div class="row">
-      	<div class="col-sm-12 bg-primary">
-              <button
-                class="btn btn-primary pull-left"
-                mwl-date-modifier
-                date="viewDate"
-                decrement="calendarView"
-                ng-show="isPastMonth(calendarDate)"
-                >
-                <span class="glyphicon glyphicon-arrow-left"></span>
-              </button>
-              <button
-                class="btn btn-primary pull-right"
-                mwl-date-modifier
-                date="viewDate"
-                increment="calendarView">
-                <span class="glyphicon glyphicon-arrow-right"></span>
-              </button>
+      <div class="row calander-wrap">
+      	<div class="col-sm-12 calander-heading">
+          <button
+            class="btn btn-primary pull-left"
+            mwl-date-modifier
+            date="viewDate"
+            decrement="calendarView"
+            ng-show="isPastMonth(calendarDate)"
+            >
+            <span class="glyphicon glyphicon-arrow-left"></span>
+          </button>
+          <button
+            class="btn btn-primary pull-right"
+            mwl-date-modifier
+            date="viewDate"
+            increment="calendarView">
+            <span class="glyphicon glyphicon-arrow-right"></span>
+          </button>
       		<h4 class="text-center">{{calendarTitle}}</h4>
       	</div>
-
-      	<mwl-calendar
-    		view="calendarView"
-    		view-date="viewDate"
-      		events="events"
-      		view-title="calendarTitle"
-            on-view-change-click="false"
-            cell-auto-open-disabled="true"
-            custom-template-urls="{calendarMonthCell: 'customMonthCell.html'}"
-      		on-timespan-click = "dateClicked(calendarCell)"
-		>
+        <mwl-calendar
+      		view="calendarView"
+      		view-date="viewDate"
+          events="events"
+          view-title="calendarTitle"
+          on-view-change-click="false"
+          cell-auto-open-disabled="true"
+          custom-template-urls="{calendarMonthCell: 'customMonthCell.html'}"
+          on-timespan-click = "dateClicked(calendarCell)">
       	</mwl-calendar>
       </div>
     </div>

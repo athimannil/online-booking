@@ -519,7 +519,9 @@ a.cal-event-week {
   border-bottom: 0px;
 }
 .cal-context {
+  display: inline-block;
   width: 100%;
+  background-color: $white;
 }
 @media (max-width: 991px) {
   .cal-year-box [class*="span"]:nth-child(2) {
@@ -560,8 +562,14 @@ a.cal-event-week {
  */
 
 /* Customisation */
-.cal-row-fluid{
+.cal-row-fluid {
     display: flex;
+    &.cal-row-head{
+      // background-color: tomato;
+      border-top: 1px solid #e1e1e1;
+      border-right: 1px solid #e1e1e1;
+      border-left: 1px solid #e1e1e1;
+    }
     @media (max-width: $screen-sm-min) {
         flex-direction: column;
         &.cal-row-head{
@@ -577,8 +585,9 @@ a.cal-event-week {
         }
     }
 }
+
 .cal-month-box{
-    .cal-row-fluid{
+    .cal-row-fluid {
         .cal-cell1{
             @media (max-width: $screen-sm-min) {
                 border-bottom: 1px solid #e1e1e1;
