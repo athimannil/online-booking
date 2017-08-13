@@ -46,7 +46,7 @@ gulp.task('styles', function() {
 			return "Error: " + error.message;
 		}))
 		.pipe(prefixer({
-            browsers: ['last 15 versions'],
+            browsers: ['last 2 versions'],
             cascade: false
 		}))
 		.pipe(gulp.dest('./public/css'))
@@ -70,4 +70,3 @@ gulp.task('watch', function() {
 
 gulp.task('install', ['files', 'bower', 'bowerFiles']);
 gulp.task('default', ['scripts', 'styles', 'connect', 'watch']);
-
