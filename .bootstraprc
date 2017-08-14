@@ -13,7 +13,6 @@ styleLoaders:
   - style
   - css
   - sass
-  - postcssLoader
 
 # Extract styles to stand-alone css file
 # Different settings for different environments can be used,
@@ -32,7 +31,7 @@ extractStyles: false
 # Thus, derived Bootstrap variables can depend on values from here.
 # See the Bootstrap _variables.scss file for examples of derived Bootstrap variables.
 #
-preBootstrapCustomizations: ./src/scss/_variables.scss
+# preBootstrapCustomizations: ./src/scss/_variables.scss
 
 
 # This gets loaded after bootstrap/variables is loaded
