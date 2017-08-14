@@ -13,12 +13,12 @@ const DIST_DIR = path.resolve(__dirname, 'dist');
 const SRC_DIR = path.resolve(__dirname, 'src');
 
 const config = {
-  // entry: [SRC_DIR + "/index.js"],
-  entry: [SRC_DIR + "/index.js",bootstrapEntryPoints.dev],
+  // entry: [SRC_DIR + '/index.js'],
+  entry: [SRC_DIR + '/index.js',bootstrapEntryPoints.dev],
   output: {
     path: DIST_DIR,
-    filename: "bundle.js"
-    // publicPath: "/app/"
+    filename: 'bundle.js'
+    // publicPath: '/app/'
   },
   module: {
     loaders: [

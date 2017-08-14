@@ -1,38 +1,37 @@
 import './scss/app.scss';
 
 import angular from 'angular';
-import uirouter from 'angular-ui-router';
-import uibootstrap from 'angular-ui-bootstrap';
 import angularCalander from 'angular-bootstrap-calendar';
 import angularMoment from 'angular-moment';
+import uibootstrap from 'angular-ui-bootstrap';
+import uirouter from 'angular-ui-router';
 
-// import routing from './js/'
+var app = angular.module('myApp', [ uirouter, uibootstrap, angularCalander, angularMoment ])
+  // .config(routing)
+  .config(function($stateProvider, $urlRouterProvider, $qProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
 
-const app = angular.module('myApp', [ angular, uirouter, uibootstrap, angularCalander, angularMoment ])
-  .config(function($stateProvider, $urlRouterProvider) {
-  // For any unmatched url, redirect to /state1
-
-  // Now set up the states
+    // Now set up the states
     $stateProvider
       .state('calander', {
         url: '/',
-        templateUrl: 'home.html',
+        templateUrl: './template/home.html',
         controller: 'homeCtrl',
       })
       .state('register', {
         url: '/{registerDay}',
-        templateUrl: 'register.html',
+        templateUrl: './template/register.html',
         controller: 'registerCtrl',
       })
 
       .state('time', {
         url: '/time',
-        templateUrl: 'time.html',
+        templateUrl: './template/time.html',
         controller: 'timeCtrl',
       })
       .state('booked', {
         url: '/booked',
-        templateUrl: 'booked.html',
+        templateUrl: './template/booked.html',
         controller: 'bookedCtrl',
       });
     $urlRouterProvider.otherwise('/');
@@ -297,21 +296,21 @@ function scheduleService($http) {
   };
 
   function updateSchedule(theData) {
-  	return $http.post('http://booking.startcode.in/appointment', theData)
-  		.then(updateScheduleComplete)
-  		.catch(updateScheduleFailed);
+    return $http.post('http://booking.startcode.in/appointment', theData)
+      .then(updateScheduleComplete)
+      .catch(updateScheduleFailed);
 
     function updateScheduleComplete(response) {
-    // return response.data;
-    //   console.log(response);
+      // return response.data;
+      //   console.log(response);
       return response;
     }
 
-  	function updateScheduleFailed(error) {
-  		console.log(error);
-  		return error;
-  		// logger.error('XHR Failed for updateSchedule.' + error.data);
-  	}
+    function updateScheduleFailed(error) {
+      console.log(error);
+      return error;
+      // logger.error('XHR Failed for updateSchedule.' + error.data);
+    }
   }
 }
 

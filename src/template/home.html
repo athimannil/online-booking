@@ -1,0 +1,83 @@
+<div class="secondary-header">
+	<div class="container">
+	  <div class="row status-wrap">
+	    <div class="col-sm-10">
+	    	<div class="booking-status">
+					<div class="media">
+					  <div class="media-left">
+					    <a class="" href="#">
+					      <img class="media-object img-circle" src="http://via.placeholder.com/64x64" alt="Name">
+					    </a>
+					  </div>
+					  <div class="media-body">
+					    <h4 class="media-heading">Dr. Name Initial</h4>
+					    <p><span class="glyphicon glyphicon-education"></span> SSLC FAILED, BSc Physics, MSc Maths, PSC <br> <span class="glyphicon glyphicon-map-marker"></span> Location, City, State</p>
+					  </div>
+					</div>
+	    	</div>
+	    </div>
+	  </div>
+	</div>
+</div>
+<div class="container">
+    <div class="col-sm-10 col-sm-offset-1 box">
+      <div class="row header-wrap">
+      	<div class="calander-heading">
+          <a
+            class="btn btn-link btn-lg pull-left"
+            mwl-date-modifier
+            date="viewDate"
+            decrement="calendarView"
+            >
+            <i class="glyphicon glyphicon-chevron-left"></i>
+          </a>
+          <a
+            class="btn btn-link btn-lg pull-right"
+            mwl-date-modifier
+            date="viewDate"
+            increment="calendarView">
+            <i class="glyphicon glyphicon-chevron-right"></i>
+          </a>
+      		<h4 class="text-center">{{calendarTitle}}</h4>
+      	</div>
+        <mwl-calendar
+      		view="calendarView"
+      		view-date="viewDate"
+          events="events"
+          view-title="calendarTitle"
+          on-view-change-click="false"
+          cell-auto-open-disabled="true"
+          custom-template-urls="{calendarMonthCell: 'customMonthCell.html'}"
+          on-timespan-click = "dateClicked(calendarCell)">
+      	</mwl-calendar>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script id="customMonthCell.html" type="text/ng-template">
+    <div class="cal-month-day custom-cell"
+        ng-class="{
+            'custom-cell-disabled': day.isPast || day.events[0].remaining_appointments == 0,
+            'hidden-xs' : day.inMonth == false
+            }"
+        >
+        <h3
+            class="custom-cell-day"
+            data-cal-date
+            ng-click="vm.calendarCtrl.dateClicked(day.date)"
+            >{{day.label}}<small class="visible-xs-inline-block">{{ day.date.format('dddd') }}</small>
+        </h3>
+        <div class="day-info" ng-if="!day.isPast">
+            <div ng-if="day.events[0].is_holiday == 0 && day.events[0].remaining_appointments != 0">
+                <h6 class="bg-success custom-cell-info">Remaining {{day.events[0].remaining_appointments}}</strong></h6>
+            </div>
+            <div ng-if="day.events[0].is_holiday == 0 && day.events[0].remaining_appointments == 0">
+                <h6 class="bg-warning custom-cell-info">No booking</h6>
+            </div>
+            <div ng-if="day.events[0].is_holiday == 1">
+                <h6 class="bg-info custom-cell-info">Holiday</h6>
+            </div>
+        </div>
+    </div>
+</script>

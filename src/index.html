@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Online Booking</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Online Booking App</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
   </head>
   <body ng-app="myApp" ng-controller="mainCtrl">
+    <header>
+        <div class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">LOGO</a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Contact us +123 4567 890</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
 
+    <ui-view class="main-container container-fluid"></ui-view>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <p class="footer-text"><small>Appointment booking 2017. All rights reserved.</small></p>
+                </div>
+            </div>
+        </div>
+    </footer>
   </body>
 </html>
