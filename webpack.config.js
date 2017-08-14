@@ -4,7 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-// const bootstrapEntryPoints = require('./webpack.bootstrap.config');
+const bootstrapEntryPoints = require('./webpack.bootstrap.config');
 
 const extractPlugin = new ExtractTextPlugin({
   filename: '[name].css'
@@ -13,8 +13,8 @@ const DIST_DIR = path.resolve(__dirname, 'dist');
 const SRC_DIR = path.resolve(__dirname, 'src');
 
 const config = {
-  entry: [SRC_DIR + "/index.js"],
-  // entry: [SRC_DIR + "/js/app.js",bootstrapEntryPoints.dev],
+  // entry: [SRC_DIR + "/index.js"],
+  entry: [SRC_DIR + "/index.js",bootstrapEntryPoints.dev],
   output: {
     path: DIST_DIR,
     filename: "bundle.js"
