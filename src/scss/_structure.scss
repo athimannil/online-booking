@@ -1,0 +1,50 @@
+html{
+	height: 100vh;
+}
+body{
+	// min-height: 100vh;
+	// display: flex;
+	// flex-wrap: wrap;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header,
+footer{
+  // flex: 1 1 100%;
+}
+
+footer{
+  margin-top: 30px;
+  background: $footer-bg;
+  color: $white;
+  .footer-text{
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+}
+
+.main-container{
+	flex: 1;
+	width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+  // min-height: calc(100vh - 50px);
+}
+
+.secondary-header{
+  background-color: $brand-primary;
+	padding-top: 2rem;
+	padding-bottom: 4rem;
+
+	.status-wrap{
+		display: flex;
+		justify-content: center;
+	}
+}
+.booking-status{
+	padding: 15px 20px;
+	background-color: $white;
+	border-radius: 4px;
+	// color: #666;
+}

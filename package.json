@@ -1,9 +1,21 @@
 {
   "name": "booking",
   "version": "1.0.0",
-  "main": "gulpfile.js",
-  "dependencies": {},
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap-sass": "^3.3.7"
+  },
   "devDependencies": {
+    "autoprefixer": "^7.1.2",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.16",
+    "css-loader": "^0.28.4",
+    "css-mqpacker": "^6.0.1",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^0.11.2",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-bower": "0.0.13",
@@ -12,20 +24,30 @@
     "gulp-flatten": "^0.2.0",
     "gulp-notify": "^2.2.0",
     "gulp-sass": "^2.2.0",
-    "gulp-uglify": "^1.5.3"
+    "gulp-uglify": "^1.5.3",
+    "html-loader": "^0.5.1",
+    "html-webpack-plugin": "^2.30.1",
+    "node-sass": "^4.5.3",
+    "postcss-flexbugs-fixes": "^3.2.0",
+    "postcss-loader": "^2.0.6",
+    "resolve-url-loader": "^2.1.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.5.4",
+    "webpack-dev-server": "^2.7.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run build",
+    "build": "webpack -d && cp src/index.html dist/index.html && webpack-dev-server --content-base src/ --inline --hot --history-api-fallback",
+    "build:prod": "webpack -p && cp src/index.html dist/index.html"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/athimannil/online-booking.git"
-  },
+  "repository": "git+https://github.com/athimannil/online-booking.git",
   "author": "Muhammed Athimannil <hello@athimannil.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/athimannil/online-booking/issues"
   },
   "homepage": "https://github.com/athimannil/online-booking#readme",
-  "description": ""
+  "description": "online booking portal"
 }
