@@ -28,7 +28,8 @@ const config = {
         include: SRC_DIR,
         loader: 'babel-loader',
         query:{
-          presets: ['es2015', 'stage-2']
+          presets: ['es2015', 'stage-2'],
+          plugins: ['angularjs-annotate']
         }
       },
       {

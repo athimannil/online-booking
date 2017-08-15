@@ -36,10 +36,10 @@ var app = angular.module('myApp', [ uirouter, uibootstrap, angularCalander, angu
       });
     $urlRouterProvider.otherwise('/');
   })
-  .controller('mainCtrl', ['$scope', function(){
+  .controller('mainCtrl', function($scope){
     console.log('hello mate');
-  }])
-  .controller('homeCtrl', ['$scope', 'moment', '$state', 'bookme', 'bookingService', function($scope, moment, $state, bookme, bookingService){
+  })
+  .controller('homeCtrl', function($scope, moment, $state, bookme, bookingService){
     $scope.calendarView = 'month';
     $scope.viewDate = new Date();
     $scope.events = [{}];
@@ -85,7 +85,7 @@ var app = angular.module('myApp', [ uirouter, uibootstrap, angularCalander, angu
           });
       }
     }
-  }])
+  })
 
   .controller('registerCtrl', function ($scope, moment, $stateParams, $state, bookme, scheduleService) {
     console.log('👇');
@@ -204,7 +204,7 @@ var app = angular.module('myApp', [ uirouter, uibootstrap, angularCalander, angu
     };
   })
 
-  .controller('bookedCtrl', ['$scope','moment', '$state', 'bookme', function($scope, moment, $state, bookme){
+  .controller('bookedCtrl', function($scope, moment, $state, bookme){
     $scope.callService = function(argument) {
       // body...
       // $scope.me = bookme.getRegistration;
@@ -213,7 +213,7 @@ var app = angular.module('myApp', [ uirouter, uibootstrap, angularCalander, angu
       $scope.registerLog = bookme.getRegistration();
       console.log($scope.register);
     };
-  }])
+  })
   .service('bookme', function(){
     var theUser = {};
     return{
@@ -316,7 +316,7 @@ function scheduleService($http) {
 
 
 
-app.directive('validSubmit', ['$parse', function ($parse) {
+app.directive('validSubmit', function ($parse) {
   return {
     // we need a form controller to be on the same element as this directive
     // in other words: this directive can only be used on a &lt;form&gt;
@@ -357,4 +357,4 @@ app.directive('validSubmit', ['$parse', function ($parse) {
       });
     }
   };
-}]);
+});
