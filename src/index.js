@@ -124,6 +124,7 @@ var app = angular.module('myApp', [ uirouter, uibootstrap, angularCalander, angu
       // update($scope.register);
       // TODO activate backend & remove next two lines
       $scope.bookedDateTime = new Date();
+      $scope.register.age = moment().diff(moment($scope.register.dob), 'years');
       $scope.bookingStatus = 'confirmed';
     };
 
