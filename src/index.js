@@ -121,7 +121,10 @@ var app = angular.module('myApp', [ uirouter, uibootstrap, angularCalander, angu
 
       delete $scope.register.db;
       console.log($scope.register);
-      update($scope.register);
+      // update($scope.register);
+      // TODO activate backend & remove next two lines
+      $scope.bookedDateTime = new Date();
+      $scope.bookingStatus = 'confirmed';
     };
 
     function update(theData) {
